@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Google Calendar</title>
+</head>
+
+<body class="body preload" style="cursor: default;">
+    <!-- app header -- fixed -->
+    <header class="header">
+        <div class="h__container">
+
+            <div class="h-col-1">
+
+                <button class="menu" data-tooltip="Main menu" aria-label="button" role="button">
+                    <svg focusable="false" style="pointer-events:none;" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24" width="24px" height="24px" fill="var(--white2)">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                    </svg>
+                </button>
+
+                <div class="logo" data-current-day-of-month="4">
+                    <svg height="36" viewBox="0 0 36 36" width="36" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" fill-rule="evenodd">
+                            <path d="m0 0h36v36h-36z" />
+                            <g fill-rule="nonzero" transform="translate(3.75 3.75)">
+                                <path d="m21.75 6.75-6.75-.75-8.25.75-.75 7.5.75 7.5 7.5.9375 7.5-.9375.75-7.6875z"
+                                    fill="#fff" />
+                                <path d="m21.75 28.5 6.75-6.75-3.375-1.5-3.375 1.5-1.5 3.375z" fill="#ea4335" />
+                                <path d="m5.25 25.125 1.5 3.375h15v-6.75h-15z" fill="#34a853" />
+                                <path
+                                    d="m2.25 0c-1.243125 0-2.25 1.006875-2.25 2.25v19.5l3.375 1.5 3.375-1.5v-15h15l1.5-3.375-1.5-3.375z"
+                                    fill="#4285f4" />
+                                <path d="m0 21.75v4.5c0 1.243125 1.006875 2.25 2.25 2.25h4.5v-6.75z" fill="#188038" />
+                                <path d="m21.75 6.75v15h6.75v-15l-3.375-1.5z" fill="#fbbc04" />
+                                <path d="m28.5 6.75v-4.5c0-1.243125-1.006875-2.25-2.25-2.25h-4.5v6.75z"
+                                    fill="#1967d2" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+
+                <h3 class="header-title">Calendar</h3>
+
+                <button class="btn-root btn-today" style="cursor:pointer;" aria-label="button"
+                    role="button">Today</button>
+
+            </div>
+
+            <div class="group-right">
+
+                <div class="h-col-2">
+                    <div class="prev-next">
+                        <button class="prev" aria-label="button" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                                fill="var(--white2)">
+                                <path d="M0 0h24v24H0z" fill="none" />
+                                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                            </svg>
+                        </button>
+                        <button class="next" aria-label="button" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                                fill="var(--white2)">
+                                <path d="M0 0h24v24H0z" fill="none" />
+                                <path d="M8.59 16.59L10 18l6-6-6-6L8.59 7.41 13.17 12z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="datetime-wrapper">
+                        <button class="datetime-content" aria-label="button" role="button">
+                            <div class="datetime-content--title">
+                                January 2023
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="h-col-3">
+
+                    <!-- <button class="h-search" data-tooltip="search" aria-label="button" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="var(--white3)">
+                            <path
+                                d="m19.6 21-6.3-6.3q-.75.6-1.725.95Q10.6 16 9.5 16q-2.725 0-4.612-1.887Q3 12.225 3 9.5q0-2.725 1.888-4.613Q6.775 3 9.5 3t4.613 1.887Q16 6.775 16 9.5q0 1.1-.35 2.075-.35.975-.95 1.725l6.3 6.3ZM9.5 14q1.875 0 3.188-1.312Q14 11.375 14 9.5q0-1.875-1.312-3.188Q11.375 5 9.5 5 7.625 5 6.312 6.312 5 7.625 5 9.5q0 1.875 1.312 3.188Q7.625 14 9.5 14Z" />
+                        </svg>
+                    </button> -->
+
+                    <button class="settings" data-tooltip="settings" aria-label="button" role="button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" fill="var(--white3)">
+                            <path
+                                d="M13.85 22.25h-3.7c-.74 0-1.36-.54-1.45-1.27l-.27-1.89c-.27-.14-.53-.29-.79-.46l-1.8.72c-.7.26-1.47-.03-1.81-.65L2.2 15.53c-.35-.66-.2-1.44.36-1.88l1.53-1.19c-.01-.15-.02-.3-.02-.46 0-.15.01-.31.02-.46l-1.52-1.19c-.59-.45-.74-1.26-.37-1.88l1.85-3.19c.34-.62 1.11-.9 1.79-.63l1.81.73c.26-.17.52-.32.78-.46l.27-1.91c.09-.7.71-1.25 1.44-1.25h3.7c.74 0 1.36.54 1.45 1.27l.27 1.89c.27.14.53.29.79.46l1.8-.72c.71-.26 1.48.03 1.82.65l1.84 3.18c.36.66.2 1.44-.36 1.88l-1.52 1.19c.01.15.02.3.02.46s-.01.31-.02.46l1.52 1.19c.56.45.72 1.23.37 1.86l-1.86 3.22c-.34.62-1.11.9-1.8.63l-1.8-.72c-.26.17-.52.32-.78.46l-.27 1.91c-.1.68-.72 1.22-1.46 1.22zm-3.23-2h2.76l.37-2.55.53-.22c.44-.18.88-.44 1.34-.78l.45-.34 2.38.96 1.38-2.4-2.03-1.58.07-.56c.03-.26.06-.51.06-.78s-.03-.53-.06-.78l-.07-.56 2.03-1.58-1.39-2.4-2.39.96-.45-.35c-.42-.32-.87-.58-1.33-.77l-.52-.22-.37-2.55h-2.76l-.37 2.55-.53.21c-.44.19-.88.44-1.34.79l-.45.33-2.38-.95-1.39 2.39 2.03 1.58-.07.56a7 7 0 0 0-.06.79c0 .26.02.53.06.78l.07.56-2.03 1.58 1.38 2.4 2.39-.96.45.35c.43.33.86.58 1.33.77l.53.22.38 2.55z">
+                            </path>
+                            <circle cx="12" cy="12" r="3.5"></circle>
+                        </svg>
+                    </button>
+
+                    <div class="select-wrapper">
+                        <button name="select__modal" id="s-modals" class="select__modal" aria-label="button"
+                            role="button">
+                            Month
+                        </button>
+                    </div>
+
+                </div>
+                <!-- end col-3 -->
+            </div>
+
+
+        </div>
+
+    </header>
+
+    <main class="main">
+        <!-- hide-sidebar -->
+        <aside class="sidebar sidebar-transition hide-sidebar">
+
+            <!-- sidebar header -->
+            <div class="sidebar-content--header">
+                <button class="sb-toggle-form-btn" aria-label="button" role="button">
+                    <span class="stfb">
+                        <svg width="36" height="36" viewBox="0 0 36 36">
+                            <path fill="#34A853" d="M16 16v14h4V20z"></path>
+                            <path fill="#4285F4" d="M30 16H20l-4 4h14z"></path>
+                            <path fill="#FBBC05" d="M6 16v4h10l4-4z"></path>
+                            <path fill="#EA4335" d="M20 16V6h-4v14z"></path>
+                            <path fill="none" d="M0 0h36v36H0z"></path>
+                        </svg>
+                    </span>
+                    <span class="sb-toggle-form-btn__content">
+                        Create
+                    </span>
+                </button>
+
+                <!-- <div class="sb-icon-toggles">
+        </div> -->
+                <!-- <button class="sb-data-btn" aria-label="button" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="var(--white2)">
+                        <path
+                            d="M6 14q-.825 0-1.412-.588Q4 12.825 4 12t.588-1.413Q5.175 10 6 10t1.412.587Q8 11.175 8 12q0 .825-.588 1.412Q6.825 14 6 14Zm6 0q-.825 0-1.412-.588Q10 12.825 10 12t.588-1.413Q11.175 10 12 10t1.413.587Q14 11.175 14 12q0 .825-.587 1.412Q12.825 14 12 14Zm6 0q-.825 0-1.413-.588Q16 12.825 16 12t.587-1.413Q17.175 10 18 10q.825 0 1.413.587Q20 11.175 20 12q0 .825-.587 1.412Q18.825 14 18 14Z" />
+                    </svg>
+                </button> -->
+            </div>
+
+
+            <!-- sidebar content (datepicker/categories) -->
+            <div class="sidebar-content__wrapper">
+
+                <!-- datepicker -->
+                <div class="datepicker-sidebar">
+                    <div class="sb-datepicker__content">
+
+                        <div class="sbdatepicker__header">
+                            <button class="sbdatepicker-title" aria-label="button" role="button">October 2022</button>
+                            <div class="sbdatepicker-nav">
+                                <button class="sbdatepicker-nav--prev" aria-label="button" role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+                                        width="24px" fill="var(--white3)" style="user-select:none; pointer-events:none">
+                                        <path d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                                    </svg>
+                                </button>
+                                <button class="sbdatepicker-nav--next" aria-label="button" role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+                                        width="24px" fill="var(--white3)" style="user-select:none; pointer-events:none">
+                                        <path d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M8.59 16.59L10 18l6-6-6-6L8.59 7.41 13.17 12z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="sbdatepicker__body">
+                            <!-- create a 7x7 table -->
+
+                            <div class="sbdatepicker__body--header">
+                                <div class="sbdatepicker__body--header-cell">S</div>
+                                <div class="sbdatepicker__body--header-cell">M</div>
+                                <div class="sbdatepicker__body--header-cell">T</div>
+                                <div class="sbdatepicker__body--header-cell">W</div>
+                                <div class="sbdatepicker__body--header-cell">T</div>
+                                <div class="sbdatepicker__body--header-cell">F</div>
+                                <div class="sbdatepicker__body--header-cell">S</div>
+                            </div>
+
+                            <div class="sbdatepicker__body--dates"></div>
+
+                        </div>
+
+                        <aside class="sb-datepicker-change-date hide-sbdpcd">
+                            <aside class="sb-close-change-date">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px"
+                                    fill="var(--white3)">
+                                    <path d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                                </svg>
+                            </aside>
+
+                            <div class="sb-yearpicker">
+                                <div class="sb-yearpicker-prev">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24"
+                                        width="18px" fill="var(--white4)">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                                    </svg>
+                                </div>
+                                <div class="sb-yearpicker-title">2023</div>
+                                <div class="sb-yearpicker-next">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24"
+                                        width="18px" fill="var(--white4)">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="sb-monthpicker">
+                                <div class="sb-monthpicker__month" data-sbdp-month="0">January</div>
+                                <div class="sb-monthpicker__month" data-sbdp-month="1">February</div>
+                                <div class="sb-monthpicker__month" data-sbdp-month="2">March</div>
+                                <div class="sb-monthpicker__month" data-sbdp-month="3">April</div>
+                                <div class="sb-monthpicker__month" data-sbdp-month="4">May</div>
+                                <div class="sb-monthpicker__month" data-sbdp-month="5">June</div>
+                                <div class="sb-monthpicker__month" data-sbdp-month="6">July</div>
+                                <div class="sb-monthpicker__month" data-sbdp-month="7">August</div>
+                                <div class="sb-monthpicker__month" data-sbdp-month="8">September</div>
+                                <div class="sb-monthpicker__month" data-sbdp-month="9">October</div>
+                                <div class="sb-monthpicker__month" data-sbdp-month="10">November</div>
+                                <div class="sb-monthpicker__month" data-sbdp-month="11">December</div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+
+                <!-- category modal -->
+                <div class="sb__categories">
+
+
+                    <div class="sb__categories--body">
+                        <!-- renders via ./sidebarCategories.js -->
+                        <div class="sb__categories--body-form">
+                        </div>
+                    </div>
+                </div>
+
+        </aside>
+
+        <!-- calendar views -->
+        <div class="container__calendars cc-tran">
+
+            <!-- dayview -->
+            <div class="dayview hide-view">
+                <div class="calendar__dayview">
+                    <!-- row 1 -->
+                    <div class="dayview--header">
+                        <div class="dayview--header-day">
+                            <div class="dayview--header-day__title">SUN</div>
+                            <div class="dayview--header-day__number">1</div>
+                        </div>
+                        <!-- <div class="dv-info-day-wrapper">
+                            <div class="dayview--header-day__info"></div>
+                        </div> -->
+                    </div>
+            
+                    <!-- row 2 -->
+                    <div class="dv-ontop-row2">
+                        <div class="dv-gmt">gmt-one</div>
+                        <div class="dayview--ontop-container" data-dv-top="true"></div>
+                    </div>
+            
+                    <!-- row 3 -->
+                    <div class="dayview__grid">
+                        <div class="dayview__grid--wrapper">
+                            <div class="dayview--side-grid__wrapper">
+                                <div class="dayview--side-grid"></div>
+                            </div>
+            
+                            <div class="dayview--main-grid" data-dv-top="false"></div>
+                        </div>
+                        <div class="dayview--footer"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- monthview -->
+            <div class="monthview hide-view">
+                <div class="monthview__top">
+                    <div class="monthview__top-weekname">SUN</div>
+                    <div class="monthview__top-weekname">MON</div>
+                    <div class="monthview__top-weekname">TUE</div>
+                    <div class="monthview__top-weekname">WED</div>
+                    <div class="monthview__top-weekname">THU</div>
+                    <div class="monthview__top-weekname">FRI</div>
+                    <div class="monthview__top-weekname">SAT</div>
+                </div>
+                <div class="monthview--calendar"></div>
+            </div>
+
+            <!-- dayview -->
+
+        </div>
+    </main>
+
+    <!-- overlays / used for popup content -->
+    <aside style="display:none;" class="change-view--overlay toggle-options"></aside>
+    <aside class="resize-overlay hide-resize-overlay" style="background-color:transparent;"></aside>
+    <aside class="sidebar-sub-menu__overlay hide-sidebar-sub-menu"></aside>
+    <aside class="category__deletion-overlay hide-category-deletion"></aside>
+    <aside class="form-overlay hide-form-overlay"></aside>
+    <aside class="entry__options--overlay entry__options--hidden"></aside>
+    <aside class="datepicker-overlay hide-datepicker-overlay"></aside>
+    <aside class="sb__info-popup-overlay hide-sb-info-popup"></aside>
+    <aside class="go-to-date-overlay hide-gotodate"></aside>
+    <aside class="category__form-overlay hide-ctg-form"></aside>
+    <aside class="shortcuts-modal-overlay hide-shortcuts"></aside>
+    <!-- end overlays -->
+
+    <!-- datepicker for header & form -->
+    <aside class="datepicker hide-datepicker" style="top:12px;">
+        <div class="datepicker__header">
+            <button class="datepicker-title" role="button" aria-label="button">October 2022</button>
+            <div class="datepicker-nav">
+                <button class="datepicker-nav--prev" role="button" aria-label="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                        fill="var(--white3)" style="user-select:none; pointer-events:none">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                    </svg>
+                </button>
+                <button class="datepicker-nav--next" role="button" aria-label="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                        fill="var(--white3)" style="user-select:none; pointer-events:none">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M8.59 16.59L10 18l6-6-6-6L8.59 7.41 13.17 12z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="datepicker__body">
+            <div class="datepicker__body--header">
+                <div class="datepicker__body--header-cell">S</div>
+                <div class="datepicker__body--header-cell">M</div>
+                <div class="datepicker__body--header-cell">T</div>
+                <div class="datepicker__body--header-cell">W</div>
+                <div class="datepicker__body--header-cell">T</div>
+                <div class="datepicker__body--header-cell">F</div>
+                <div class="datepicker__body--header-cell">S</div>
+            </div>
+            <div class="datepicker__body--dates"></div>
+        </div>
+
+        <aside class="datepicker-change-date hide-dpcd">
+            <aside class="close-change-date">
+                <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px"
+                    fill="var(--white3)">
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                </svg>
+            </aside>
+
+            <div class="yearpicker">
+                <button class="yearpicker-prev" type="text">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px"
+                        fill="var(--white4)">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                    </svg>
+                </button>
+                <div class="yearpicker-title">2023</div>
+                <button class="yearpicker-next">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px"
+                        fill="var(--white4)">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="monthpicker">
+                <div class="monthpicker__month" data-dp-month="0">January</div>
+                <div class="monthpicker__month" data-dp-month="1">February</div>
+                <div class="monthpicker__month" data-dp-month="2">March</div>
+                <div class="monthpicker__month" data-dp-month="3">April</div>
+                <div class="monthpicker__month" data-dp-month="4">May</div>
+                <div class="monthpicker__month" data-dp-month="5">June</div>
+                <div class="monthpicker__month" data-dp-month="6">July</div>
+                <div class="monthpicker__month" data-dp-month="7">August</div>
+                <div class="monthpicker__month" data-dp-month="8">September</div>
+                <div class="monthpicker__month" data-dp-month="9">October</div>
+                <div class="monthpicker__month" data-dp-month="10">November</div>
+                <div class="monthpicker__month" data-dp-month="11">December</div>
+            </div>
+        </aside>
+    </aside>
+
+    <!-- MAIN APP FORM -->
+    <aside class="entries__form hide-form" style="top:0;left:0;bottom:0;right:0;margin:auto;max-width:450px;">
+        <aside class="form-modal-overlay hide-form-overlay"></aside>
+
+        <div class="entries__form--header">
+            <div class="form-header--dragarea"></div>
+            <div class="form--header__icon-close" data-tooltip="close form">
+                <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="var(--white2)">
+                    <path
+                        d="M6.062 15 5 13.938 8.938 10 5 6.062 6.062 5 10 8.938 13.938 5 15 6.062 11.062 10 15 13.938 13.938 15 10 11.062Z" />
+                </svg>
+            </div>
+        </div>
+
+        <form class="entry-form">
+            <div class="entries__form--body">
+                <!-- row 1: title -->
+                <div class="form--body__title form-body-single">
+                    <input type="text" placeholder="Add title" class="form--body__title-input" maxlength="50"
+                        spellcheck="false" required>
+                </div>
+
+                <div class="form--body__description form-body-single">
+                    <textarea placeholder="Add description" class="form--body__description-input" maxLength="200"
+                        spellcheck="false"></textarea>
+                </div>
+
+                <!-- row 2: start date & time -->
+                <div class="form--body__start form-body-double">
+                    <div class="form--body__start-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="var(--white3)"
+                            class="form--body-svg__start">
+                            <path
+                                d="m15.3 16.7 1.4-1.4-3.7-3.7V7h-2v5.4ZM12 22q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-10Zm0 8q3.325 0 5.663-2.337Q20 15.325 20 12t-2.337-5.663Q15.325 4 12 4T6.338 6.337Q4 8.675 4 12t2.338 5.663Q8.675 20 12 20Z" />
+                        </svg>
+                    </div>
+                    <div class="form--body__start-inputs">
+                        <span class="form--body-start__date" data-form-date-type="start">
+                        </span>
+
+                        <div class="form-br"></div>
+
+                        <span class="form--body-start__time" data-form-time-type="start">
+                            1:30am
+                        </span>
+                    </div>
+                </div>
+
+                <!-- row 3: end date & time -->
+                <div class="form--body__end form-body-double">
+                    <div class="form--body__end-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="var(--white3)"
+                            class="form--body-svg__end">
+                            <path
+                                d="m15.3 16.7 1.4-1.4-3.7-3.7V7h-2v5.4ZM12 22q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-10Zm0 8q3.325 0 5.663-2.337Q20 15.325 20 12t-2.337-5.663Q15.325 4 12 4T6.338 6.337Q4 8.675 4 12t2.338 5.663Q8.675 20 12 20Z" />
+                        </svg>
+                    </div>
+                    <div class="form--body__end-inputs">
+                        <span class="form--body-end__date" data-form-date-type="end">
+                        </span>
+
+                        <div class="form-br"></div>
+
+
+                        <span class="form--body-end__time" data-form-time-type="end">
+                            3:30am
+                        </span>
+
+                    </div>
+                </div>
+
+                <!-- row 4: category -->
+                <div class="form--body__category form-body-double">
+                    <div class="form--body__category-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                            fill="var(--white3)">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" />
+                        </svg>
+                    </div>
+                    <div class="form--body__category-inputs">
+                        <aside class="close-options-floating__btn"
+                            style="z-index:-1;user-select:none;pointer-events:none;opacity:0;box-shadow:none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="var(--white3)">
+                                <path
+                                    d="M6.062 15 5 13.938 8.938 10 5 6.062 6.062 5 10 8.938 13.938 5 15 6.062 11.062 10 15 13.938 13.938 15 10 11.062Z" />
+                            </svg>
+                        </aside>
+                        <div class="form--body__category-modal--wrapper">
+                            <div class="form--body__category-modal--wrapper-selection">
+                                <span class="form--body__category-modal--wrapper__color"></span>
+                                <span class="form--body__category-modal--wrapper__title">
+                                </span>
+                            </div>
+                            <span class="form--body__category-modal hide-form-category-modal">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="entries__form--footer">
+                <!-- <button class="form--footer__button-cancel" type="reset" role="button"
+                    aria-label="button">reset</button> -->
+                <button class="form--footer__button-save" type="submit" role="button" aria-label="button">save</button>
+            </div>
+            <!-- footer -->
+        </form>
+    </aside>
+
+    <!-- options for header select element (pick view) -->
+    <aside class="change-view--wrapper toggle-options">
+        <div class="change-view--options">
+            <div class="change-view--option">
+                <div class="view-option" data-view-option="day" data-view-key="D">Day</div>
+                <!-- <div class="view-option" data-view-option="week" data-view-key="W">Week</div> -->
+                <div class="view-option" data-view-option="month" data-view-key="M">Month</div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- floating toggle form button visible when sidebar is closed -->
+    <aside class="toggle-form">
+        <span class="toggle-form-btn" role="button" aria-label="open form">
+            <svg width="36" height="36" viewBox="0 0 36 36">
+                <path fill="#34A853" d="M16 16v14h4V20z"></path>
+                <path fill="#4285F4" d="M30 16H20l-4 4h14z"></path>
+                <path fill="#FBBC05" d="M6 16v4h10l4-4z"></path>
+                <path fill="#EA4335" d="M20 16V6h-4v14z"></path>
+                <path fill="none" d="M0 0h36v36H0z"></path>
+            </svg>
+        </span>
+    </aside>
+
+
+    <aside class="collapse-view hide-cbt"></aside>
+
+    <!-- SETTINGS -->
+    <aside class="sidebar-sub-menu hide-sidebar-sub-menu">
+        <div class="sub-menu__header">
+
+            <div class="sub-menu--title">
+                Settings & Data
+            </div>
+
+            <div class="sub-menu--icons">
+
+                <div class="close-sub-menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="var(--white2)">
+                        <path
+                            d="M6.062 15 5 13.938 8.938 10 5 6.062 6.062 5 10 8.938 13.938 5 15 6.062 11.062 10 15 13.938 13.938 15 10 11.062Z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-menu__body">
+
+            <div class="sub-menu-content">
+
+                <!-- row two -->
+                <div class="sub-menu--item smi-theme-actions">
+                    <div class="sub-menu--item__title">Themes:</div>
+                    <div class="sub-menu--item__description">
+                        Light & Dark.
+                    </div>
+                    <div class="sub-menu--item__actions theme-actions">
+                        <!-- <div class="theme-option theme-option-dark">
+                            <input class="theme-radio__input" name="themeoption" type="radio" value="dark" checked>
+                            <span>Dark</span>
+                        </div> -->
+                        <div class="theme-option theme-option-light">
+                            <input class="theme-radio__input" name="themeoption" type="radio" value="light">
+                            <span>Light</span>
+                        </div>
+                        <div class="theme-option theme-option-contrast">
+                            <input class="theme-radio__input" name="themeoption" type="radio" value="contrast">
+                            <span>Dark</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </aside>
+
+    <!-- click calendar entry to view details -->
+    <aside class="entry__options entry__options--hidden">
+
+        <div class="entry__options--content">
+
+            <div class="entry__options--header">
+
+                <div class="entry__options-datetime">
+                    <div class="entry__options-date"></div>
+                    <div class="entry__options-time"></div>
+                </div>
+
+                <div class="entry__options--header-icons">
+                    <button class="entry__options-icon eoi__edit" data-tooltip="edit event (e)" role="button"
+                        aria-label="button">
+
+                    </button>
+
+                    <button class="entry__options-icon eoi__delete" data-tooltip="delete event" role="button"
+                        aria-label="button">
+                        <svg focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="var(--white2)">
+                            <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z">
+                            </path>
+                            <path d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
+                        </svg>
+                    </button>
+
+                    <button class="entry__options-icon eoi__close" data-tooltip="close (esc)" role="button"
+                        aria-label="button">
+                        <svg focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="var(--white2)">
+                            <path
+                                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z">
+                            </path>
+                        </svg>
+                    </button>
+
+                </div>
+            </div>
+            <!-- end header -->
+
+            <div class="entry__options--body">
+                <div class="entry-option-desc">
+                    <div class="eob-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="var(--white2)">
+                            <path
+                                d="M6 12v-1.5h8V12Zm0 3v-1.5h6V15Zm-1.5 3q-.625 0-1.062-.448Q3 17.104 3 16.5v-11q0-.604.438-1.052Q3.875 4 4.5 4H6V2h1.5v2h5V2H14v2h1.5q.625 0 1.062.448Q17 4.896 17 5.5v11q0 .604-.438 1.052Q16.125 18 15.5 18Zm0-1.5h11V9h-11v7.5Z" />
+                        </svg>
+                    </div>
+                    <div class="eob-title"></div>
+                </div>
+                <div class="entry-option-desc">
+                    <div class="eob-icon"></div>
+                    <div class="eob-description"></div>
+                </div>
+                <div class="entry-option-desc">
+                    <div class="eob-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" class="eob-category--icon"
+                            fill="var(--primarylight1)">
+                            <path
+                                d="M10 18q-1.646 0-3.104-.625-1.458-.625-2.552-1.719t-1.719-2.552Q2 11.646 2 10q0-1.667.625-3.115.625-1.447 1.719-2.541Q5.438 3.25 6.896 2.625T10 2q1.667 0 3.115.625 1.447.625 2.541 1.719 1.094 1.094 1.719 2.541Q18 8.333 18 10q0 1.646-.625 3.104-.625 1.458-1.719 2.552t-2.541 1.719Q11.667 18 10 18Z" />
+                        </svg>
+                    </div>
+                    <div class="eob-category"></div>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <script src="index.js" type="module"></script>
+    <script src="./components/forms/entryForm.js" type="module"></script>
+    <script src="./components/forms/formUtils.js" type="module"></script>
+    <script src="./components/forms/setForm.js" type="module"></script>
+    <script src="./config/appDefaults.js" type="module"></script>
+    <script src="./config/renderViews.js" type="module"></script>
+    <script src="./config/setViews.js" type="module"></script>
+    <script src="./context/appContext.js" type="module"></script>
+    <script src="./context/store.js" type="module"></script>
+    <script src="./factory/entries.js" type="module"></script>
+    <script src="./factory/queries.js" type="module"></script>
+    <script src="./locales/en.js" type="module"></script>
+    <script src="./utilities/dateutils.js" type="module"></script>
+    <script src="./utilities/dragutils.js" type="module"></script>
+    <script src="./utilities/helpers.js" type="module"></script>
+
+
+
+</body>
+
+</html>
